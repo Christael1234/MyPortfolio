@@ -144,31 +144,111 @@ function showNotification(message, type = 'info') {
    }, 5000);
 }
 
-// Intersection Observer for animations
+// Enhanced Intersection Observer for scroll animations
 const observerOptions = {
-   threshold: 0.1,
-   rootMargin: '0px 0px -50px 0px'
+   threshold: 0.15,
+   rootMargin: '0px 0px -100px 0px'
 };
 
 const observer = new IntersectionObserver((entries) => {
    entries.forEach(entry => {
       if (entry.isIntersecting) {
-         entry.target.style.opacity = '1';
-         entry.target.style.transform = 'translateY(0)';
+         entry.target.classList.add('animate');
+         observer.unobserve(entry.target);
       }
    });
 }, observerOptions);
 
-// Observe elements for animation
+// Initialize scroll animations on page load
 document.addEventListener('DOMContentLoaded', () => {
-   const animatedElements = document.querySelectorAll('.project-card, .skill-item, .stat');
-
-   animatedElements.forEach(el => {
-      el.style.opacity = '0';
-      el.style.transform = 'translateY(30px)';
-      el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-      observer.observe(el);
+   // Add animation classes to elements
+   const projectCards = document.querySelectorAll('.project-card');
+   projectCards.forEach((card, index) => {
+      card.classList.add('fade-in-up');
+      card.style.transitionDelay = `${index * 0.1}s`;
+      observer.observe(card);
    });
+
+   const skillItems = document.querySelectorAll('.skill-item');
+   skillItems.forEach((item, index) => {
+      item.classList.add('fade-in-scale');
+      item.style.transitionDelay = `${index * 0.05}s`;
+      observer.observe(item);
+   });
+
+   const certificationCards = document.querySelectorAll('.certification-card');
+   certificationCards.forEach((card, index) => {
+      card.classList.add('fade-in-up');
+      card.style.transitionDelay = `${index * 0.15}s`;
+      observer.observe(card);
+   });
+
+   const stats = document.querySelectorAll('.stat');
+   stats.forEach((stat, index) => {
+      stat.classList.add('fade-in-scale');
+      stat.style.transitionDelay = `${index * 0.1}s`;
+      observer.observe(stat);
+   });
+
+   // Animate section titles
+   const sectionTitles = document.querySelectorAll('.section-title');
+   sectionTitles.forEach(title => {
+      title.classList.add('fade-in-down');
+      observer.observe(title);
+   });
+
+   // Animate hero content
+   const heroContent = document.querySelector('.hero-content');
+   if (heroContent) {
+      heroContent.classList.add('fade-in-left');
+      setTimeout(() => heroContent.classList.add('animate'), 100);
+   }
+
+   const heroImage = document.querySelector('.hero-image');
+   if (heroImage) {
+      heroImage.classList.add('fade-in-right');
+      setTimeout(() => heroImage.classList.add('animate'), 200);
+   }
+});
+
+// Number counter animation for stats
+function animateCounter(element, target, hasPlus = false, duration = 2000) {
+   const start = 0;
+   const increment = target / (duration / 16);
+   let current = start;
+
+   const timer = setInterval(() => {
+      current += increment;
+      if (current >= target) {
+         element.textContent = target + (hasPlus ? '+' : '');
+         clearInterval(timer);
+      } else {
+         element.textContent = Math.floor(current) + (hasPlus ? '+' : '');
+      }
+   }, 16);
+}
+
+// Observe stats for counter animation
+const statsObserver = new IntersectionObserver((entries) => {
+   entries.forEach(entry => {
+      if (entry.isIntersecting) {
+         const statNumber = entry.target.querySelector('h3');
+         if (statNumber && !statNumber.classList.contains('counted')) {
+            statNumber.classList.add('counted');
+            const originalText = statNumber.textContent;
+            const hasPlus = originalText.includes('+');
+            const target = parseInt(originalText);
+            if (!isNaN(target)) {
+               animateCounter(statNumber, target, hasPlus);
+            }
+         }
+         statsObserver.unobserve(entry.target);
+      }
+   });
+}, { threshold: 0.5 });
+
+document.querySelectorAll('.stat').forEach(stat => {
+   statsObserver.observe(stat);
 });
 
 // Typing effect for hero title

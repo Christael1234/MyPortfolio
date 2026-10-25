@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Christael - Portfolio (Brutalist)</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Grotesk:wght@400;500;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --paper: #fff6e0;
+            --ink: #111;
+            --yellow: #ffd23f;
+            --pink: #ff6fb5;
+            --blue: #4f7cff;
+            --green: #3ee08f;
+            --orange: #ff7a2f;
+            --b: 3px solid var(--ink);
+            --sh: 6px 6px 0 var(--ink);
+            --display: 'Archivo Black', Impact, sans-serif;
+            --body: 'Space Grotesk', system-ui, sans-serif;
+            --mono: 'Space Mono', ui-monospace, monospace;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { background: var(--paper); color: var(--ink); font-family: var(--body); line-height: 1.5; overflow-x: hidden;
+            background-image: radial-gradient(var(--ink) 1px, transparent 1px); background-size: 22px 22px; background-position: -11px -11px; }
+        body::before { content: ''; position: fixed; inset: 0; background: var(--paper); opacity: 0.9; z-index: -1; }
+        a { color: inherit; text-decoration: none; }
+        img { display: block; max-width: 100%; }
+        ::selection { background: var(--pink); }
+
+        .wrap { max-width: 1240px; margin: 0 auto; padding: 0 24px; }
+        .box { background: #fff; border: var(--b); border-radius: 14px; box-shadow: var(--sh); }
+        .push { transition: transform 0.15s, box-shadow 0.15s; }
+        .push:hover { transform: translate(-3px, -3px); box-shadow: 9px 9px 0 var(--ink); }
+        .push:active { transform: translate(4px, 4px); box-shadow: 2px 2px 0 var(--ink); }
+        .tag { display: inline-block; padding: 4px 10px; border: 2px solid var(--ink); border-radius: 999px; font-family: var(--mono); font-size: 0.78rem; font-weight: 700; background: #fff; }
+
+        /* Nav */
+        .nav { position: sticky; top: 14px; z-index: 20; margin-top: 14px; }
+        .nav .box { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 10px 10px 10px 18px; }
+        .logo { font-family: var(--display); font-size: 1.3rem; text-transform: uppercase; }
+        .logo span { background: var(--yellow); padding: 0 6px; border: 2px solid var(--ink); border-radius: 6px; margin-left: 4px; }
+        .nav-links { display: flex; gap: 8px; }
+        .btn { display: inline-flex; align-items: center; gap: 8px; padding: 10px 18px; border: var(--b); border-radius: 10px; font-weight: 700; box-shadow: 4px 4px 0 var(--ink); background: #fff; cursor: pointer; font-family: var(--body); font-size: 1rem; transition: transform 0.15s, box-shadow 0.15s; }
+        .btn:hover { transform: translate(-2px, -2px); box-shadow: 6px 6px 0 var(--ink); }
+        .btn:active { transform: translate(3px, 3px); box-shadow: 1px 1px 0 var(--ink); }
+        .btn-y { background: var(--yellow); }
+        .btn-p { background: var(--pink); }
+        .btn-k { background: var(--ink); color: #fff; box-shadow: 4px 4px 0 var(--pink); }
+
+        /* Hero */
+        .hero { padding: 64px 0 40px; display: grid; grid-template-columns: 1.5fr 1fr; gap: 32px; align-items: center; }
+        .hero h1 { font-family: var(--display); font-size: clamp(3.2rem, 9vw, 7.8rem); line-height: 0.9; text-transform: uppercase; letter-spacing: -0.02em; }
+        .hero h1 .mark { background: var(--pink); padding: 0 0.12em; border: var(--b); border-radius: 12px; display: inline-block; transform: rotate(-2deg); box-shadow: var(--sh); }
+        .hero p { font-size: 1.2rem; margin: 28px 0; max-width: 40ch; font-weight: 500; }
+        .hero-cta { display: flex; gap: 14px; flex-wrap: wrap; }
+        .photo-wrap { position: relative; }
+        .photo { aspect-ratio: 4 / 5; overflow: hidden; transform: rotate(2.5deg); background: var(--blue); }
+        .photo img { width: 100%; height: 100%; object-fit: cover; object-position: center 72%; }
+        .sticker { position: absolute; display: grid; place-items: center; text-align: center; font-family: var(--display); text-transform: uppercase; border: var(--b); box-shadow: 4px 4px 0 var(--ink); }
+        .sticker-1 { top: -22px; left: -26px; width: 118px; height: 118px; border-radius: 50%; background: var(--yellow); transform: rotate(-14deg); font-size: 0.9rem; line-height: 1.05; animation: spin 14s linear infinite; }
+        .sticker-2 { bottom: 26px; right: -18px; padding: 8px 14px; border-radius: 10px; background: var(--green); font-size: 0.95rem; transform: rotate(-6deg); }
+
+        /* Marquee */
+        .strip { margin: 40px 0; border-block: var(--b); background: var(--yellow); overflow: hidden; transform: rotate(-1.5deg); }
+        .strip.alt { background: var(--ink); color: var(--paper); transform: rotate(1deg); margin-top: -28px; }
+        .strip-track { display: flex; width: max-content; gap: 28px; padding: 14px 0; font-family: var(--display); font-size: 1.8rem; text-transform: uppercase; animation: slide 20s linear infinite; }
+        .strip.alt .strip-track { animation-direction: reverse; }
+
+        /* Sections */
+        section { padding: 64px 0; }
+        .title { display: flex; align-items: center; gap: 16px; margin-bottom: 36px; }
+        .title h2 { font-family: var(--display); font-size: clamp(2.4rem, 6vw, 4.5rem); text-transform: uppercase; line-height: 0.95; }
+        .num { flex-shrink: 0; display: grid; place-items: center; width: 64px; height: 64px; border: var(--b); border-radius: 50%; background: var(--blue); color: #fff; font-family: var(--display); font-size: 1.3rem; box-shadow: 4px 4px 0 var(--ink); }
+
+        /* About */
+        .about { display: grid; grid-template-columns: 1fr 1.3fr; gap: 28px; }
+        .about-img { overflow: hidden; transform: rotate(-1.5deg); }
+        .about-img img { width: 100%; height: 100%; object-fit: cover; }
+        .about-text { padding: 32px; background: var(--green); }
+        .about-text p:first-child { font-family: var(--display); font-size: 1.6rem; line-height: 1.15; text-transform: uppercase; margin-bottom: 18px; }
+        .about-text p + p { font-size: 1.05rem; font-weight: 500; }
+        .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 28px; }
+        .stats div { padding: 16px; text-align: center; }
+        .stats strong { display: block; font-family: var(--display); font-size: 2.6rem; line-height: 1; }
+        .stats span { font-family: var(--mono); font-size: 0.75rem; font-weight: 700; text-transform: uppercase; }
+
+        /* Projects */
+        .projects { display: grid; grid-template-columns: repeat(2, 1fr); gap: 28px; }
+        .project { overflow: hidden; display: flex; flex-direction: column; }
+        .project:first-child { grid-column: 1 / -1; }
+        .project:first-child .project-img { aspect-ratio: 16 / 7; }
+        .project:nth-child(1) { background: var(--yellow); }
+        .project:nth-child(2) { background: var(--pink); }
+        .project:nth-child(3) { background: var(--blue); }
+        .project:nth-child(4) { background: var(--orange); }
+        .project-img { margin: 16px 16px 0; border: var(--b); border-radius: 10px; overflow: hidden; aspect-ratio: 16 / 10; background: #fff; }
+        .project-img img { width: 100%; height: 100%; object-fit: cover; object-position: top; transition: transform 0.5s; }
+        .project:hover .project-img img { transform: scale(1.06) rotate(-1deg); }
+        .project-body { padding: 20px; display: flex; flex-direction: column; gap: 10px; flex: 1; }
+        .project-body h3 { font-family: var(--display); font-size: 1.9rem; text-transform: uppercase; line-height: 1; display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+        .project-body h3 span { display: grid; place-items: center; width: 44px; height: 44px; flex-shrink: 0; border: var(--b); border-radius: 50%; background: #fff; font-size: 1.1rem; transition: transform 0.3s; }
+        .project:hover h3 span { transform: rotate(45deg); }
+        .project-body p { font-weight: 500; }
+        .tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: auto; padding-top: 6px; }
+
+        /* Skills */
+        .skills { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+        .skill-box { padding: 24px; }
+        .skill-box h3 { display: inline-block; font-family: var(--display); text-transform: uppercase; font-size: 1.3rem; padding: 4px 12px; border: var(--b); border-radius: 8px; margin-bottom: 18px; }
+        .skill-box:nth-child(1) h3 { background: var(--yellow); }
+        .skill-box:nth-child(2) h3 { background: var(--pink); }
+        .skill-box:nth-child(3) h3 { background: var(--green); }
+        .skill-box .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+        .skill-box .tag { font-size: 0.9rem; padding: 6px 12px; transition: transform 0.15s, background 0.15s; }
+        .skill-box .tag:hover { background: var(--ink); color: #fff; transform: rotate(-4deg) scale(1.08); }
+
+        /* Certs */
+        .certs { display: grid; grid-template-columns: repeat(4, 1fr); gap: 22px; }
+        .cert { padding: 20px; display: flex; flex-direction: column; gap: 10px; }
+        .cert:nth-child(odd) { transform: rotate(-1deg); }
+        .cert:nth-child(even) { transform: rotate(1deg); }
+        .cert:hover { transform: rotate(0) translate(-3px, -3px); }
+        .cert img { width: 84px; height: 84px; object-fit: contain; }
+        .cert h3 { font-family: var(--display); text-transform: uppercase; font-size: 1.1rem; line-height: 1.1; }
+        .cert .go { margin-top: auto; font-family: var(--mono); font-weight: 700; font-size: 0.85rem; text-decoration: underline; text-decoration-thickness: 2px; }
+
+        /* Contact */
+        .contact { display: grid; grid-template-columns: 1fr 1.2fr; gap: 28px; }
+        .contact-card { padding: 32px; background: var(--blue); color: #fff; }
+        .contact-card h2 { font-family: var(--display); font-size: clamp(2.4rem, 5vw, 3.8rem); line-height: 0.95; text-transform: uppercase; margin-bottom: 20px; }
+        .contact-card p { font-weight: 500; margin-bottom: 20px; }
+        .contact-card .btn { color: var(--ink); margin: 0 8px 10px 0; }
+        .contact-lines { font-family: var(--mono); font-weight: 700; margin-top: 12px; }
+        .contact-lines p { margin-bottom: 6px; }
+        .form { padding: 28px; display: grid; gap: 14px; }
+        .form h3 { font-family: var(--display); text-transform: uppercase; font-size: 1.6rem; }
+        .f-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+        input, textarea { width: 100%; padding: 14px; border: var(--b); border-radius: 10px; font: inherit; font-weight: 500; background: var(--paper); outline: none; resize: vertical; transition: box-shadow 0.15s, background 0.15s; }
+        input:focus, textarea:focus { background: #fff; box-shadow: 4px 4px 0 var(--pink); }
+        .form .btn { justify-self: start; }
+
+        footer { padding: 32px 0 48px; font-family: var(--mono); font-weight: 700; }
+        footer .wrap { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+
+        @keyframes slide { to { transform: translateX(-50%); } }
+        @keyframes spin { to { transform: rotate(346deg); } }
+
+        @media (max-width: 900px) {
+            .nav-links .btn:not(.btn-k) { display: none; }
+            .hero, .about, .contact { grid-template-columns: 1fr; }
+            .photo-wrap { max-width: 420px; margin: 20px auto 0; width: 100%; }
+            .projects { grid-template-columns: 1fr; }
+            .skills { grid-template-columns: 1fr; }
+            .certs { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        @media (max-width: 560px) {
+            .wrap { padding: 0 16px; }
+            .certs, .f-row, .stats { grid-template-columns: 1fr; }
+            .sticker-1 { left: -6px; width: 96px; height: 96px; font-size: 0.75rem; }
+            .sticker-2 { right: -4px; }
+            .num { width: 48px; height: 48px; font-size: 1rem; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after { animation: none !important; transition: none !important; }
+        }
+    </style>
+</head>
+<body>
+    <div class="wrap nav">
+        <div class="box">
+            <a href="#top" class="logo">Christael<span>.dev</span></a>
+            <div class="nav-links">
+                <a href="#work" class="btn">Work</a>
+                <a href="#skills" class="btn">Skills</a>
+                <a href="#contact" class="btn btn-k">Hire me ✦</a>
+            </div>
+        </div>
+    </div>
+
+    <main id="top">
+        <div class="wrap hero">
+            <div>
+                <span class="tag">● Available for work · Abuja, NG</span>
+                <h1 style="margin-top: 18px;">I build <span class="mark">web</span> things.</h1>
+                <p>Hi, I'm Christael, a full stack developer &amp; designer creating beautiful, functional, user-centred digital experiences.</p>
+                <div class="hero-cta">
+                    <a href="#work" class="btn btn-y">See my work ↓</a>
+                    <a href="#contact" class="btn btn-p">Say hello ✌</a>
+                </div>
+            </div>
+            <div class="photo-wrap">
+                <div class="photo box"><img src="../images/profilephoto.jpg" alt="Portrait of Christael"></div>
+                <div class="sticker sticker-1">Full<br>stack<br>dev ✦</div>
+                <div class="sticker sticker-2">3+ yrs exp</div>
+            </div>
+        </div>
+
+        <div class="strip" aria-hidden="true"><div class="strip-track">
+            <span>Laravel ✱</span><span>React ✱</span><span>JavaScript ✱</span><span>Python ✱</span><span>PHP ✱</span><span>MySQL ✱</span><span>Figma ✱</span><span>Bootstrap ✱</span>
+            <span>Laravel ✱</span><span>React ✱</span><span>JavaScript ✱</span><span>Python ✱</span><span>PHP ✱</span><span>MySQL ✱</span><span>Figma ✱</span><span>Bootstrap ✱</span>
+        </div></div>
+        <div class="strip alt" aria-hidden="true"><div class="strip-track">
+            <span>Clean code ★</span><span>Sharp design ★</span><span>Real results ★</span><span>Clean code ★</span><span>Sharp design ★</span><span>Real results ★</span>
+            <span>Clean code ★</span><span>Sharp design ★</span><span>Real results ★</span><span>Clean code ★</span><span>Sharp design ★</span><span>Real results ★</span>
+        </div></div>
+
+        <section id="about"><div class="wrap">
+            <div class="title"><span class="num">01</span><h2>About me</h2></div>
+            <div class="about">
+                <div class="about-img box"><img src="../images/aboutphoto.JPEG" alt="Christael presenting code"></div>
+                <div class="about-text box">
+                    <p>I love creating innovative solutions that solve real-world problems.</p>
+                    <p>With expertise in modern web technologies, I bring ideas to life through clean, efficient code and intuitive design. Off the clock I'm exploring new tech, contributing to open source, or sharing knowledge with the dev community.</p>
+                    <div class="stats">
+                        <div class="box"><strong>3+</strong><span>Years exp</span></div>
+                        <div class="box"><strong>10+</strong><span>Projects</span></div>
+                        <div class="box"><strong>10+</strong><span>Clients</span></div>
+                    </div>
+                </div>
+            </div>
+        </div></section>
+
+        <section id="work"><div class="wrap">
+            <div class="title"><span class="num">02</span><h2>Selected work</h2></div>
+            <div class="projects">
+                <a class="project box push" href="https://joshua-alabi-portfolio.vercel.app/" target="_blank" rel="noopener noreferrer">
+                    <div class="project-img"><img src="../images/joshua-alabi.png" alt="Joshua Alabi portfolio"></div>
+                    <div class="project-body"><h3>Joshua Alabi <span>↗</span></h3><p>A portfolio for AI engineer Joshua Onasi Alabi, showcasing ML projects, tools and certifications with a clean light/dark theme.</p><div class="tags"><span class="tag">HTML5</span><span class="tag">CSS3</span><span class="tag">JavaScript</span></div></div>
+                </a>
+                <a class="project box push" href="https://smart-budget-indol.vercel.app/" target="_blank" rel="noopener noreferrer">
+                    <div class="project-img"><img src="../images/smart-budget.png" alt="Smart Budget"></div>
+                    <div class="project-body"><h3>Smart Budget <span>↗</span></h3><p>Track income, expenses and savings with interactive charts and insights.</p><div class="tags"><span class="tag">JavaScript</span><span class="tag">Bootstrap</span></div></div>
+                </a>
+                <a class="project box push" href="http://build-board-three.vercel.app/" target="_blank" rel="noopener noreferrer">
+                    <div class="project-img"><img src="../images/buildboard.png" alt="Buildboard"></div>
+                    <div class="project-body"><h3>Buildboard <span>↗</span></h3><p>Build professional portfolios with drag-and-drop and a real-time preview.</p><div class="tags"><span class="tag">JavaScript</span><span class="tag">Bootstrap</span></div></div>
+                </a>
+            </div>
+        </div></section>
+
+        <section id="skills"><div class="wrap">
+            <div class="title"><span class="num">03</span><h2>Toolkit</h2></div>
+            <div class="skills">
+                <div class="skill-box box"><h3>Frontend</h3><div class="chips"><span class="tag">HTML5</span><span class="tag">CSS3</span><span class="tag">JavaScript</span><span class="tag">React</span><span class="tag">Bootstrap</span></div></div>
+                <div class="skill-box box"><h3>Backend</h3><div class="chips"><span class="tag">Python</span><span class="tag">PHP</span><span class="tag">Laravel</span><span class="tag">MySQL</span><span class="tag">Blade</span></div></div>
+                <div class="skill-box box"><h3>Tools</h3><div class="chips"><span class="tag">Git</span><span class="tag">Figma</span><span class="tag">VS Code</span><span class="tag">Terminal</span><span class="tag">XAMPP</span><span class="tag">phpMyAdmin</span><span class="tag">Vercel</span></div></div>
+            </div>
+        </div></section>
+
+        <section id="certs"><div class="wrap">
+            <div class="title"><span class="num">04</span><h2>Certified</h2></div>
+            <div class="certs">
+                <a class="cert box push" href="https://www.credly.com/badges/77b4d629-7268-4012-8729-b124bbaacb79/public_url" target="_blank" rel="noopener noreferrer"><img src="../badges/ITE.png" alt=""><span class="tag" style="align-self:flex-start">Cisco · 2022</span><h3>IT Essentials</h3><span class="go">View →</span></a>
+                <a class="cert box push" href="https://www.credly.com/badges/5107cfa7-3fcd-468a-bd3a-1ad9ed38ad6d/public_url" target="_blank" rel="noopener noreferrer"><img src="../badges/introduction-to-cybersecurity.png" alt=""><span class="tag" style="align-self:flex-start">Cisco · 2022</span><h3>Intro to Cybersecurity</h3><span class="go">View →</span></a>
+                <a class="cert box push" href="https://www.credly.com/badges/5dea939a-64c4-4741-b11b-e5297eb9e16a/public_url" target="_blank" rel="noopener noreferrer"><img src="../badges/python-essentials-1.1.png" alt=""><span class="tag" style="align-self:flex-start">Cisco · 2023</span><h3>Python Essentials</h3><span class="go">View →</span></a>
+                <a class="cert box push" href="https://www.linkedin.com/learning/certificates/6c43d1bc7f0ec4900abeda7d51c58094ce325934bb29f5b620848a302c9084eb?trk=share_certificate" target="_blank" rel="noopener noreferrer"><img src="../badges/LI-In-Bug.png" alt=""><span class="tag" style="align-self:flex-start">LinkedIn · 2025</span><h3>Practical GitHub Actions</h3><span class="go">View →</span></a>
+            </div>
+        </div></section>
+
+        <section id="contact"><div class="wrap">
+            <div class="contact">
+                <div class="contact-card box">
+                    <h2>Let's make something loud.</h2>
+                    <p>I'm always up for new opportunities and exciting projects.</p>
+                    <a class="btn btn-y" href="mailto:christaelujomor@gmail.com">Email me ✉</a>
+                    <a class="btn" href="https://github.com/Christael1234" target="_blank" rel="noopener noreferrer">GitHub</a>
+                    <a class="btn" href="https://www.linkedin.com/in/christael-blessing-ujomor-971b812a1/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+                    <a class="btn" href="https://www.instagram.com/_.cristel_/" target="_blank" rel="noopener noreferrer">Instagram</a>
+                    <div class="contact-lines">
+                        <p>christaelujomor@gmail.com</p>
+                        <p><a href="tel:+2348114286908">+234 811 428 6908</a></p>
+                        <p>Abuja, Nigeria</p>
+                    </div>
+                </div>
+                <form class="form box" action="https://formspree.io/f/mvgqwoze" method="POST">
+                    <h3>Drop a message</h3>
+                    <div class="f-row">
+                        <input type="text" name="name" placeholder="Your name" required aria-label="Your name">
+                        <input type="email" name="email" placeholder="Your email" required aria-label="Your email">
+                    </div>
+                    <input type="text" name="subject" placeholder="Subject" required aria-label="Subject">
+                    <textarea name="message" rows="5" placeholder="What are we building?" required aria-label="Message"></textarea>
+                    <button type="submit" class="btn btn-p">Send it →</button>
+                </form>
+            </div>
+        </div></section>
+    </main>
+
+    <footer><div class="wrap"><span>© Christael</span><a href="#top">Back to top ↑</a></div></footer>
+</body>
+</html>

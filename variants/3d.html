@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Christael - Portfolio (3D)</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;800&family=Manrope:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #05050b;
+            --fg: #f2f0ff;
+            --muted: #9a97b3;
+            --glass: rgba(255, 255, 255, 0.05);
+            --line: rgba(255, 255, 255, 0.1);
+            --c1: #5ef2ff;
+            --c2: #a77bff;
+            --c3: #ff8a5b;
+            --grad: linear-gradient(100deg, var(--c1), var(--c2) 50%, var(--c3));
+            --display: 'Unbounded', system-ui, sans-serif;
+            --body: 'Manrope', system-ui, sans-serif;
+            --mono: 'JetBrains Mono', ui-monospace, monospace;
+            --ease: cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { background: radial-gradient(ellipse at 70% 10%, #1b1336, var(--bg) 60%) fixed; color: var(--fg); font-family: var(--body); line-height: 1.6; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+        a { color: inherit; text-decoration: none; }
+        img { display: block; max-width: 100%; }
+        ::selection { background: var(--c2); color: #fff; }
+
+        #scene { position: fixed; inset: 0; width: 100%; height: 100%; z-index: 0; display: block; }
+        .page { position: relative; z-index: 1; }
+        .wrap { max-width: 1200px; margin: 0 auto; padding: 0 28px; }
+        .mono { font-family: var(--mono); font-size: 0.78rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+        .grad { background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent; }
+        .glass { background: var(--glass); border: 1px solid var(--line); border-radius: 24px; backdrop-filter: blur(18px) saturate(1.3); -webkit-backdrop-filter: blur(18px) saturate(1.3); }
+
+        /* Nav */
+        .nav { position: fixed; top: 18px; left: 50%; transform: translateX(-50%); z-index: 10; display: flex; align-items: center; gap: 6px; padding: 6px 6px 6px 18px; border-radius: 999px; }
+        .nav .logo { font-family: var(--display); font-weight: 800; font-size: 0.95rem; margin-right: 10px; }
+        .nav a.l { padding: 8px 14px; border-radius: 999px; font-size: 0.88rem; color: var(--muted); transition: color 0.3s, background 0.3s; }
+        .nav a.l:hover { color: var(--fg); background: rgba(255, 255, 255, 0.07); }
+        .nav .cta { padding: 9px 16px; border-radius: 999px; background: var(--fg); color: var(--bg); font-weight: 600; font-size: 0.88rem; }
+
+        /* Hero */
+        .hero { position: relative; min-height: 100vh; display: flex; align-items: center; padding-top: 80px; }
+        .hero-inner { max-width: 760px; }
+        .hero h1 { font-family: var(--display); font-weight: 800; font-size: clamp(2.6rem, 7vw, 6rem); line-height: 1; letter-spacing: -0.04em; margin: 22px 0 26px; }
+        .hero h1 .ln { display: block; overflow: hidden; padding-bottom: 0.06em; }
+        .hero h1 .ln > span { display: inline-block; transform: translateY(110%) rotateX(-40deg); transform-origin: bottom; animation: up 1.3s var(--ease) forwards; }
+        .hero h1 .ln:nth-child(2) > span { animation-delay: 0.12s; }
+        .hero h1 .ln:nth-child(3) > span { animation-delay: 0.24s; }
+        .hero p { max-width: 46ch; color: var(--muted); font-size: 1.1rem; opacity: 0; animation: fade 1s 0.6s forwards; }
+        .pill { display: inline-flex; align-items: center; gap: 10px; padding: 7px 14px; border-radius: 999px; }
+        .pill i { width: 8px; height: 8px; border-radius: 50%; background: var(--c1); box-shadow: 0 0 12px var(--c1); }
+        .btns { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 34px; opacity: 0; animation: fade 1s 0.8s forwards; }
+        .btn { display: inline-flex; align-items: center; gap: 10px; padding: 15px 24px; border-radius: 999px; font-weight: 600; transition: transform 0.4s var(--ease), box-shadow 0.4s; }
+        .btn:hover { transform: translateY(-3px); }
+        .btn-g { background: var(--grad); color: #0b0716; box-shadow: 0 10px 40px -10px rgba(167, 123, 255, 0.7); }
+        .btn-o { border: 1px solid var(--line); background: rgba(255, 255, 255, 0.04); }
+        .scroll-hint { position: absolute; bottom: 28px; left: 50%; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 10px; }
+        .scroll-hint span { width: 1px; height: 48px; background: linear-gradient(var(--fg), transparent); animation: drip 2s infinite; transform-origin: top; }
+
+        /* Sections */
+        section { padding: 120px 0; }
+        .head { margin-bottom: 48px; }
+        .head h2 { font-family: var(--display); font-weight: 700; font-size: clamp(2rem, 5vw, 3.8rem); line-height: 1.05; letter-spacing: -0.04em; margin-top: 12px; }
+
+        /* About */
+        .about { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: 28px; align-items: stretch; }
+        .about-img { border-radius: 24px; overflow: hidden; min-height: 380px; position: relative; }
+        .about-img img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+        .about-img::after { content: ''; position: absolute; inset: 0; background: linear-gradient(200deg, transparent 40%, rgba(5, 5, 11, 0.7)); }
+        .about-text { padding: 36px; display: flex; flex-direction: column; gap: 18px; }
+        .about-text .lead { font-family: var(--display); font-weight: 500; font-size: 1.5rem; line-height: 1.3; letter-spacing: -0.02em; }
+        .about-text p { color: var(--muted); }
+        .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: auto; }
+        .stats div { padding: 18px; border-radius: 16px; background: rgba(255, 255, 255, 0.04); border: 1px solid var(--line); }
+        .stats strong { display: block; font-family: var(--display); font-size: 2.2rem; line-height: 1.1; }
+
+        /* 3D tilt project cards */
+        .projects { display: grid; grid-template-columns: repeat(2, 1fr); gap: 28px; perspective: 1200px; }
+        .card { position: relative; display: block; padding: 18px; border-radius: 26px; transform-style: preserve-3d; transition: transform 0.6s var(--ease); will-change: transform; }
+        .card:first-child { grid-column: 1 / -1; }
+        .card:first-child .shot { aspect-ratio: 16 / 7; }
+        .card.tilting { transition: transform 0.08s linear; }
+        .card .shot { border-radius: 16px; overflow: hidden; aspect-ratio: 16 / 10; transform: translateZ(50px); box-shadow: 0 30px 60px -20px rgba(0, 0, 0, 0.8); }
+        .card .shot img { width: 100%; height: 100%; object-fit: cover; object-position: top; }
+        .card .info { padding: 20px 6px 4px; transform: translateZ(30px); display: flex; justify-content: space-between; gap: 16px; }
+        .card h3 { font-family: var(--display); font-weight: 700; font-size: 1.5rem; letter-spacing: -0.03em; }
+        .card p { color: var(--muted); font-size: 0.95rem; margin-top: 6px; }
+        .card .tags { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 14px; }
+        .card .tags span { font-family: var(--mono); font-size: 0.7rem; padding: 4px 10px; border-radius: 999px; border: 1px solid var(--line); color: var(--muted); }
+        .card .go { flex-shrink: 0; width: 46px; height: 46px; border-radius: 50%; display: grid; place-items: center; border: 1px solid var(--line); transform: translateZ(60px); transition: background 0.3s, color 0.3s; }
+        .card:hover .go { background: var(--fg); color: var(--bg); }
+        .card .glare { position: absolute; inset: 0; border-radius: inherit; pointer-events: none; opacity: 0; transition: opacity 0.4s; background: radial-gradient(circle at var(--gx, 50%) var(--gy, 50%), rgba(255, 255, 255, 0.16), transparent 50%); }
+        .card:hover .glare { opacity: 1; }
+
+        /* Skills sphere */
+        .skills { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; align-items: center; }
+        .skills-list { padding: 32px; display: grid; gap: 22px; }
+        .skills-list h3 { font-family: var(--display); font-weight: 500; font-size: 1.05rem; margin-bottom: 8px; }
+        .skills-list p { color: var(--muted); }
+        .sphere { position: relative; height: 460px; cursor: grab; touch-action: pan-y; }
+        .sphere span { position: absolute; left: 50%; top: 50%; white-space: nowrap; font-family: var(--display); font-weight: 500; font-size: 1.1rem; will-change: transform, opacity; user-select: none; }
+        .sphere span:nth-child(3n) { color: var(--c1); }
+        .sphere span:nth-child(3n+1) { color: var(--c2); }
+        .sphere span:nth-child(3n+2) { color: var(--c3); }
+
+        /* Certs */
+        .certs { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; perspective: 1000px; }
+        .cert { padding: 22px; display: flex; flex-direction: column; gap: 10px; transform-style: preserve-3d; transition: transform 0.6s var(--ease); }
+        .cert:hover { transform: rotateY(-12deg) rotateX(6deg) translateZ(20px); }
+        .cert img { width: 76px; height: 76px; object-fit: contain; transform: translateZ(40px); filter: drop-shadow(0 12px 20px rgba(0, 0, 0, 0.5)); }
+        .cert h3 { font-family: var(--display); font-weight: 500; font-size: 1.02rem; line-height: 1.3; }
+        .cert .go { margin-top: auto; font-size: 0.9rem; font-weight: 600; }
+
+        /* Contact */
+        .contact { padding: 48px; display: grid; grid-template-columns: 1fr 1.1fr; gap: 48px; }
+        .contact h2 { font-family: var(--display); font-weight: 800; font-size: clamp(2rem, 4.5vw, 3.4rem); line-height: 1.05; letter-spacing: -0.04em; }
+        .contact .info { margin-top: 24px; display: grid; gap: 10px; color: var(--muted); }
+        .contact .info a:hover { color: var(--fg); }
+        .socials { display: flex; gap: 10px; margin-top: 24px; }
+        .socials a { padding: 10px 16px; border-radius: 999px; border: 1px solid var(--line); font-size: 0.9rem; transition: background 0.3s, color 0.3s; }
+        .socials a:hover { background: var(--fg); color: var(--bg); }
+        form { display: grid; gap: 14px; }
+        .f-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+        input, textarea { width: 100%; padding: 15px 18px; border-radius: 14px; border: 1px solid var(--line); background: rgba(255, 255, 255, 0.04); color: var(--fg); font: inherit; outline: none; resize: vertical; transition: border-color 0.3s, box-shadow 0.3s; }
+        input::placeholder, textarea::placeholder { color: var(--muted); }
+        input:focus, textarea:focus { border-color: var(--c2); box-shadow: 0 0 0 4px rgba(167, 123, 255, 0.15); }
+        form .btn { justify-self: start; border: 0; cursor: pointer; font: inherit; font-weight: 600; }
+
+        footer { padding: 40px 0 56px; }
+        footer .wrap { display: flex; justify-content: space-between; }
+
+        .reveal { opacity: 0; transform: translateY(40px) rotateX(-8deg); transform-origin: top; transition: opacity 1.1s var(--ease), transform 1.1s var(--ease); }
+        .reveal.in { opacity: 1; transform: none; }
+
+        @keyframes up { to { transform: none; } }
+        @keyframes fade { to { opacity: 1; } }
+        @keyframes drip { 0% { transform: scaleY(0); } 50% { transform: scaleY(1); } 100% { transform: scaleY(1); opacity: 0; } }
+
+        @media (max-width: 900px) {
+            .nav a.l { display: none; }
+            .about, .skills, .contact, .projects { grid-template-columns: 1fr; }
+            .certs { grid-template-columns: repeat(2, 1fr); }
+            .contact { padding: 28px; gap: 32px; }
+            .sphere { height: 360px; }
+        }
+
+        @media (max-width: 560px) {
+            .wrap { padding: 0 16px; }
+            section { padding: 80px 0; }
+            .certs, .f-row { grid-template-columns: 1fr; }
+            .about-text { padding: 24px; }
+            .stats strong { font-size: 1.6rem; }
+            .sphere span { font-size: 0.9rem; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+            .reveal { opacity: 1; transform: none; }
+        }
+    </style>
+    <script type="importmap">
+        { "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js" } }
+    </script>
+</head>
+<body>
+    <canvas id="scene" aria-hidden="true"></canvas>
+
+    <nav class="nav glass">
+        <a href="#top" class="logo">christael<span class="grad">.</span></a>
+        <a href="#about" class="l">About</a>
+        <a href="#work" class="l">Work</a>
+        <a href="#skills" class="l">Skills</a>
+        <a href="#contact" class="cta">Contact</a>
+    </nav>
+
+    <div class="page" id="top">
+        <section class="hero">
+            <div class="wrap">
+                <div class="hero-inner">
+                    <span class="pill glass mono"><i></i>Available · Abuja, Nigeria</span>
+                    <h1>
+                        <span class="ln"><span>Hi, I'm</span></span>
+                        <span class="ln"><span class="grad">Christael.</span></span>
+                        <span class="ln"><span>I build the web.</span></span>
+                    </h1>
+                    <p>Full Stack Developer &amp; Designer creating beautiful, functional, user-centred digital experiences, with a passion for clean code and innovative solutions.</p>
+                    <div class="btns">
+                        <a href="#work" class="btn btn-g">Explore my work →</a>
+                        <a href="#contact" class="btn btn-o">Get in touch</a>
+                    </div>
+                </div>
+            </div>
+            <div class="scroll-hint mono">Scroll<span></span></div>
+        </section>
+
+        <section id="about">
+            <div class="wrap">
+                <div class="head reveal"><span class="mono">01 / About</span><h2>Code with a <span class="grad">designer's</span> eye.</h2></div>
+                <div class="about">
+                    <div class="about-img reveal"><img src="../images/aboutphoto.JPEG" alt="Christael presenting code"></div>
+                    <div class="about-text glass reveal">
+                        <p class="lead">I'm a passionate developer who loves creating innovative solutions to real-world problems.</p>
+                        <p>With expertise in modern web technologies, I bring ideas to life through clean, efficient code and intuitive design. When I'm not coding, you'll find me exploring new technologies, contributing to open source, or sharing knowledge with the developer community.</p>
+                        <div class="stats">
+                            <div><strong class="grad">3+</strong><span class="mono">Years</span></div>
+                            <div><strong class="grad">10+</strong><span class="mono">Projects</span></div>
+                            <div><strong class="grad">10+</strong><span class="mono">Clients</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="work">
+            <div class="wrap">
+                <div class="head reveal"><span class="mono">02 / Selected work</span><h2>Projects in <span class="grad">every dimension.</span></h2></div>
+                <div class="projects">
+                    <a class="card glass reveal" href="https://joshua-alabi-portfolio.vercel.app/" target="_blank" rel="noopener noreferrer">
+                        <div class="shot"><img src="../images/joshua-alabi.png" alt="Joshua Alabi portfolio"></div>
+                        <div class="info"><div><h3>Joshua Alabi</h3><p>A portfolio for AI engineer Joshua Onasi Alabi, showcasing ML projects, tools and certifications with a clean light/dark theme.</p><div class="tags"><span>HTML5</span><span>CSS3</span><span>JavaScript</span></div></div><span class="go">↗</span></div>
+                        <span class="glare"></span>
+                    </a>
+                    <a class="card glass reveal" href="https://smart-budget-indol.vercel.app/" target="_blank" rel="noopener noreferrer">
+                        <div class="shot"><img src="../images/smart-budget.png" alt="Smart Budget"></div>
+                        <div class="info"><div><h3>Smart Budget</h3><p>Track income, expenses and savings with interactive charts and insights.</p><div class="tags"><span>JavaScript</span><span>Bootstrap</span></div></div><span class="go">↗</span></div>
+                        <span class="glare"></span>
+                    </a>
+                    <a class="card glass reveal" href="http://build-board-three.vercel.app/" target="_blank" rel="noopener noreferrer">
+                        <div class="shot"><img src="../images/buildboard.png" alt="Buildboard"></div>
+                        <div class="info"><div><h3>Buildboard</h3><p>Create professional portfolios with drag-and-drop and a real-time preview.</p><div class="tags"><span>JavaScript</span><span>Bootstrap</span></div></div><span class="go">↗</span></div>
+                        <span class="glare"></span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section id="skills">
+            <div class="wrap">
+                <div class="head reveal"><span class="mono">03 / Toolkit</span><h2>Drag the <span class="grad">sphere.</span></h2></div>
+                <div class="skills">
+                    <div class="skills-list glass reveal">
+                        <div><h3>Frontend</h3><p>HTML5 · CSS3 · JavaScript · React · Bootstrap</p></div>
+                        <div><h3>Backend</h3><p>Python · PHP · Laravel · MySQL · Blade</p></div>
+                        <div><h3>Tools &amp; others</h3><p>Git · Figma · VS Code · Terminal · XAMPP · phpMyAdmin · Vercel</p></div>
+                    </div>
+                    <div class="sphere reveal" aria-hidden="true"></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="certs">
+            <div class="wrap">
+                <div class="head reveal"><span class="mono">04 / Credentials</span><h2>Certified.</h2></div>
+                <div class="certs">
+                    <a class="cert glass reveal" href="https://www.credly.com/badges/77b4d629-7268-4012-8729-b124bbaacb79/public_url" target="_blank" rel="noopener noreferrer"><img src="../badges/ITE.png" alt=""><span class="mono">Cisco · 2022</span><h3>IT Essentials</h3><span class="go grad">View →</span></a>
+                    <a class="cert glass reveal" href="https://www.credly.com/badges/5107cfa7-3fcd-468a-bd3a-1ad9ed38ad6d/public_url" target="_blank" rel="noopener noreferrer"><img src="../badges/introduction-to-cybersecurity.png" alt=""><span class="mono">Cisco · 2022</span><h3>Introduction to Cybersecurity</h3><span class="go grad">View →</span></a>
+                    <a class="cert glass reveal" href="https://www.credly.com/badges/5dea939a-64c4-4741-b11b-e5297eb9e16a/public_url" target="_blank" rel="noopener noreferrer"><img src="../badges/python-essentials-1.1.png" alt=""><span class="mono">Cisco · 2023</span><h3>Python Essentials</h3><span class="go grad">View →</span></a>
+                    <a class="cert glass reveal" href="https://www.linkedin.com/learning/certificates/6c43d1bc7f0ec4900abeda7d51c58094ce325934bb29f5b620848a302c9084eb?trk=share_certificate" target="_blank" rel="noopener noreferrer"><img src="../badges/LI-In-Bug.png" alt=""><span class="mono">LinkedIn · 2025</span><h3>Practical GitHub Actions</h3><span class="go grad">View →</span></a>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact">
+            <div class="wrap">
+                <div class="contact glass reveal">
+                    <div>
+                        <span class="mono">05 / Contact</span>
+                        <h2 style="margin-top: 12px;">Let's build something <span class="grad">out of this world.</span></h2>
+                        <div class="info">
+                            <a href="mailto:christaelujomor@gmail.com">christaelujomor@gmail.com</a>
+                            <a href="tel:+2348114286908">+234 811 428 6908</a>
+                            <span>Abuja, Nigeria</span>
+                        </div>
+                        <div class="socials">
+                            <a href="https://github.com/Christael1234" target="_blank" rel="noopener noreferrer">GitHub</a>
+                            <a href="https://www.linkedin.com/in/christael-blessing-ujomor-971b812a1/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+                            <a href="https://www.instagram.com/_.cristel_/" target="_blank" rel="noopener noreferrer">Instagram</a>
+                        </div>
+                    </div>
+                    <form action="https://formspree.io/f/mvgqwoze" method="POST">
+                        <div class="f-row">
+                            <input type="text" name="name" placeholder="Your name" required aria-label="Your name">
+                            <input type="email" name="email" placeholder="Your email" required aria-label="Your email">
+                        </div>
+                        <input type="text" name="subject" placeholder="Subject" required aria-label="Subject">
+                        <textarea name="message" rows="5" placeholder="Your message" required aria-label="Message"></textarea>
+                        <button type="submit" class="btn btn-g">Send message →</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <footer><div class="wrap mono"><span>© Christael</span><a href="#top">Back to top ↑</a></div></footer>
+    </div>
+
+    <!-- Page interactions (no WebGL needed) -->
+    <script>
+        const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+        const io = new IntersectionObserver(entries => entries.forEach(e => {
+            if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+        }), { threshold: 0.12 });
+        document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+        // Tilt project cards toward the cursor
+        if (matchMedia('(hover: hover)').matches && !reduceMotion) {
+            document.querySelectorAll('.card').forEach(card => {
+                card.addEventListener('pointermove', e => {
+                    const r = card.getBoundingClientRect();
+                    const x = (e.clientX - r.left) / r.width;
+                    const y = (e.clientY - r.top) / r.height;
+                    card.classList.add('tilting');
+                    card.style.transform = `rotateX(${(0.5 - y) * 14}deg) rotateY(${(x - 0.5) * 18}deg)`;
+                    card.style.setProperty('--gx', `${x * 100}%`);
+                    card.style.setProperty('--gy', `${y * 100}%`);
+                });
+                card.addEventListener('pointerleave', () => {
+                    card.classList.remove('tilting');
+                    card.style.transform = '';
+                });
+            });
+        }
+
+        // Draggable 3D skills sphere
+        const sphere = document.querySelector('.sphere');
+        const words = ['HTML5', 'CSS3', 'JavaScript', 'React', 'Bootstrap', 'Python', 'PHP', 'Laravel', 'MySQL', 'Blade', 'Git', 'Figma', 'VS Code', 'Terminal', 'XAMPP', 'phpMyAdmin', 'Vercel', 'REST APIs', 'UI Design', 'Responsive'];
+        const points = words.map((word, i) => {
+            const el = document.createElement('span');
+            el.textContent = word;
+            sphere.appendChild(el);
+            // Fibonacci sphere distribution
+            const y = 1 - (i / (words.length - 1)) * 2;
+            const rad = Math.sqrt(1 - y * y);
+            const theta = i * Math.PI * (3 - Math.sqrt(5));
+            return { el, x: Math.cos(theta) * rad, y, z: Math.sin(theta) * rad };
+        });
+
+        let vx = 0.004, vy = 0.003, dragging = false, lastX = 0, lastY = 0;
+        sphere.addEventListener('pointerdown', e => { dragging = true; lastX = e.clientX; lastY = e.clientY; sphere.setPointerCapture(e.pointerId); sphere.style.cursor = 'grabbing'; });
+        sphere.addEventListener('pointerup', () => { dragging = false; sphere.style.cursor = ''; });
+        sphere.addEventListener('pointermove', e => {
+            if (!dragging) return;
+            vy = (e.clientX - lastX) * 0.0012;
+            vx = (e.clientY - lastY) * -0.0012;
+            lastX = e.clientX;
+            lastY = e.clientY;
+        });
+
+        function spin() {
+            const R = Math.min(sphere.clientWidth, sphere.clientHeight) * 0.42;
+            const cx = Math.cos(vx), sx = Math.sin(vx), cy = Math.cos(vy), sy = Math.sin(vy);
+            points.forEach(p => {
+                const y1 = p.y * cx - p.z * sx;
+                const z1 = p.y * sx + p.z * cx;
+                const x2 = p.x * cy + z1 * sy;
+                const z2 = -p.x * sy + z1 * cy;
+                p.x = x2; p.y = y1; p.z = z2;
+                const scale = (p.z + 2) / 3;
+                p.el.style.transform = `translate(-50%, -50%) translate3d(${p.x * R}px, ${p.y * R}px, 0) scale(${scale})`;
+                p.el.style.opacity = 0.25 + (p.z + 1) * 0.375;
+                p.el.style.zIndex = Math.round(p.z * 100) + 100;
+            });
+            if (!dragging) {
+                vx += (0.004 - vx) * 0.02;
+                vy += (0.003 - vy) * 0.02;
+            }
+            if (!reduceMotion) requestAnimationFrame(spin);
+        }
+        spin();
+    </script>
+
+    <!-- WebGL scene: a morphing iridescent blob, orbiting shapes and a starfield -->
+    <script type="module">
+        import * as THREE from 'three';
+
+        const canvas = document.getElementById('scene');
+        let renderer;
+        try {
+            renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
+        } catch {
+            canvas.remove();
+            throw new Error('WebGL unavailable, showing the CSS background instead');
+        }
+        renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(45, 1, 0.1, 100);
+        camera.position.set(0, 0, 7);
+
+        const noise = `
+            vec4 permute(vec4 x){ return mod(((x*34.0)+1.0)*x, 289.0); }
+            vec4 taylorInvSqrt(vec4 r){ return 1.79284291400159 - 0.85373472095314 * r; }
+            float snoise(vec3 v){
+                const vec2 C = vec2(1.0/6.0, 1.0/3.0);
+                const vec4 D = vec4(0.0, 0.5, 1.0, 2.0);
+                vec3 i = floor(v + dot(v, C.yyy));
+                vec3 x0 = v - i + dot(i, C.xxx);
+                vec3 g = step(x0.yzx, x0.xyz);
+                vec3 l = 1.0 - g;
+                vec3 i1 = min(g.xyz, l.zxy);
+                vec3 i2 = max(g.xyz, l.zxy);
+                vec3 x1 = x0 - i1 + C.xxx;
+                vec3 x2 = x0 - i2 + 2.0 * C.xxx;
+                vec3 x3 = x0 - 1.0 + 3.0 * C.xxx;
+                i = mod(i, 289.0);
+                vec4 p = permute(permute(permute(i.z + vec4(0.0, i1.z, i2.z, 1.0)) + i.y + vec4(0.0, i1.y, i2.y, 1.0)) + i.x + vec4(0.0, i1.x, i2.x, 1.0));
+                float n_ = 1.0/7.0;
+                vec3 ns = n_ * D.wyz - D.xzx;
+                vec4 j = p - 49.0 * floor(p * ns.z * ns.z);
+                vec4 x_ = floor(j * ns.z);
+                vec4 y_ = floor(j - 7.0 * x_);
+                vec4 x = x_ * ns.x + ns.yyyy;
+                vec4 y = y_ * ns.x + ns.yyyy;
+                vec4 h = 1.0 - abs(x) - abs(y);
+                vec4 b0 = vec4(x.xy, y.xy);
+                vec4 b1 = vec4(x.zw, y.zw);
+                vec4 s0 = floor(b0) * 2.0 + 1.0;
+                vec4 s1 = floor(b1) * 2.0 + 1.0;
+                vec4 sh = -step(h, vec4(0.0));
+                vec4 a0 = b0.xzyw + s0.xzyw * sh.xxyy;
+                vec4 a1 = b1.xzyw + s1.xzyw * sh.zzww;
+                vec3 p0 = vec3(a0.xy, h.x);
+                vec3 p1 = vec3(a0.zw, h.y);
+                vec3 p2 = vec3(a1.xy, h.z);
+                vec3 p3 = vec3(a1.zw, h.w);
+                vec4 norm = taylorInvSqrt(vec4(dot(p0,p0), dot(p1,p1), dot(p2,p2), dot(p3,p3)));
+                p0 *= norm.x; p1 *= norm.y; p2 *= norm.z; p3 *= norm.w;
+                vec4 m = max(0.6 - vec4(dot(x0,x0), dot(x1,x1), dot(x2,x2), dot(x3,x3)), 0.0);
+                m = m * m;
+                return 42.0 * dot(m*m, vec4(dot(p0,x0), dot(p1,x1), dot(p2,x2), dot(p3,x3)));
+            }`;
+
+        const blobMaterial = new THREE.ShaderMaterial({
+            uniforms: { uTime: { value: 0 }, uDistort: { value: 0.28 }, uDim: { value: 0 }, uMouse: { value: new THREE.Vector2() } },
+            vertexShader: `
+                uniform float uTime;
+                uniform float uDistort;
+                uniform vec2 uMouse;
+                varying vec3 vNormal;
+                varying vec3 vView;
+                varying float vNoise;
+                ${noise}
+                void main() {
+                    float n = snoise(position * 0.85 + vec3(uTime * 0.22, uMouse * 0.6));
+                    vNoise = n;
+                    vec3 p = position + normal * n * uDistort;
+                    vec4 mv = modelViewMatrix * vec4(p, 1.0);
+                    vNormal = normalize(normalMatrix * normal);
+                    vView = normalize(-mv.xyz);
+                    gl_Position = projectionMatrix * mv;
+                }`,
+            fragmentShader: `
+                uniform float uTime;
+                uniform float uDim;
+                varying vec3 vNormal;
+                varying vec3 vView;
+                varying float vNoise;
+                void main() {
+                    float fres = pow(1.0 - max(dot(vNormal, vView), 0.0), 2.2);
+                    // Brand gradient: cyan -> violet -> orange
+                    vec3 c1 = vec3(0.37, 0.95, 1.0);
+                    vec3 c2 = vec3(0.65, 0.48, 1.0);
+                    vec3 c3 = vec3(1.0, 0.54, 0.36);
+                    float k = 0.5 + 0.5 * sin(6.2831 * (vNoise * 0.35 + fres * 0.5 + uTime * 0.04));
+                    vec3 iri = k < 0.5 ? mix(c1, c2, k * 2.0) : mix(c2, c3, k * 2.0 - 1.0);
+                    vec3 deep = vec3(0.05, 0.03, 0.12);
+                    vec3 col = mix(deep, iri, 0.2 + fres * 0.85);
+                    col += fres * vec3(0.55, 0.45, 1.0) * 0.4;
+                    col = mix(col, deep, uDim);
+                    gl_FragColor = vec4(col, 1.0);
+                }`
+        });
+
+        const blob = new THREE.Mesh(new THREE.IcosahedronGeometry(1.5, 64), blobMaterial);
+        scene.add(blob);
+
+        // Orbiting metallic shapes
+        scene.add(new THREE.AmbientLight(0xffffff, 0.25));
+        const l1 = new THREE.PointLight(0x5ef2ff, 40, 30); l1.position.set(4, 3, 4); scene.add(l1);
+        const l2 = new THREE.PointLight(0xff8a5b, 40, 30); l2.position.set(-4, -2, 3); scene.add(l2);
+        const l3 = new THREE.PointLight(0xa77bff, 30, 30); l3.position.set(0, 4, -2); scene.add(l3);
+
+        const shapeMat = new THREE.MeshStandardMaterial({ color: 0xffffff, metalness: 0.9, roughness: 0.15 });
+        const shapes = [
+            new THREE.Mesh(new THREE.TorusGeometry(0.35, 0.12, 32, 64), shapeMat),
+            new THREE.Mesh(new THREE.OctahedronGeometry(0.32), shapeMat),
+            new THREE.Mesh(new THREE.TorusKnotGeometry(0.22, 0.07, 128, 16), shapeMat),
+            new THREE.Mesh(new THREE.IcosahedronGeometry(0.22, 0), shapeMat)
+        ];
+        const orbit = new THREE.Group();
+        shapes.forEach((s, i) => {
+            const a = (i / shapes.length) * Math.PI * 2;
+            s.userData = { a, r: 2.5 + (i % 2) * 0.5, y: (i - 1.5) * 0.6, speed: 0.15 + i * 0.03 };
+            orbit.add(s);
+        });
+        scene.add(orbit);
+
+        // Starfield
+        const starCount = 1400;
+        const starPos = new Float32Array(starCount * 3);
+        for (let i = 0; i < starCount; i++) {
+            starPos[i * 3] = (Math.random() - 0.5) * 40;
+            starPos[i * 3 + 1] = (Math.random() - 0.5) * 40;
+            starPos[i * 3 + 2] = (Math.random() - 0.5) * 30 - 5;
+        }
+        const starGeo = new THREE.BufferGeometry();
+        starGeo.setAttribute('position', new THREE.BufferAttribute(starPos, 3));
+        const stars = new THREE.Points(starGeo, new THREE.PointsMaterial({ color: 0xc9c4ff, size: 0.035, transparent: true, opacity: 0.75 }));
+        scene.add(stars);
+
+        const group = new THREE.Group();
+        group.add(blob, orbit);
+        scene.add(group);
+
+        let mobile = false;
+        function resize() {
+            const w = innerWidth, h = innerHeight;
+            renderer.setSize(w, h, false);
+            camera.aspect = w / h;
+            camera.updateProjectionMatrix();
+            mobile = w < 760;
+        }
+        addEventListener('resize', resize);
+        resize();
+
+        const mouse = new THREE.Vector2(), smooth = new THREE.Vector2();
+        addEventListener('pointermove', e => {
+            mouse.set(e.clientX / innerWidth - 0.5, e.clientY / innerHeight - 0.5);
+        });
+
+        let scroll = 0, scrollSmooth = 0;
+        addEventListener('scroll', () => {
+            scroll = scrollY / Math.max(document.body.scrollHeight - innerHeight, 1);
+        }, { passive: true });
+
+        const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+        const clock = new THREE.Clock();
+
+        function frame() {
+            const t = clock.getElapsedTime();
+            smooth.lerp(mouse, 0.05);
+            scrollSmooth += (scroll - scrollSmooth) * 0.06;
+
+            blobMaterial.uniforms.uTime.value = t;
+            blobMaterial.uniforms.uMouse.value.copy(smooth);
+            blobMaterial.uniforms.uDistort.value = 0.26 + Math.sin(t * 0.7) * 0.05 + scrollSmooth * 0.15;
+            // Fade the blob down once the hero scrolls away so text stays readable
+            blobMaterial.uniforms.uDim.value = Math.min(scrollSmooth * 6, 1) * 0.6;
+
+            // The scene drifts side to side as the page scrolls, staying clear of the content
+            const swing = Math.cos(scrollSmooth * Math.PI * 4);
+            group.position.x = mobile ? 0 : 2.9 * swing;
+            group.position.y = mobile ? 1.2 - scrollSmooth * 2 : -scrollSmooth * 0.8;
+            const scale = mobile ? 0.7 : 0.9 - scrollSmooth * 0.2;
+            group.scale.setScalar(scale);
+            group.rotation.y = t * 0.12 + scrollSmooth * Math.PI * 2 + smooth.x * 0.6;
+            group.rotation.x = smooth.y * 0.4;
+
+            shapes.forEach(s => {
+                const d = s.userData;
+                const a = d.a + t * d.speed;
+                s.position.set(Math.cos(a) * d.r, d.y + Math.sin(t + d.a) * 0.2, Math.sin(a) * d.r);
+                s.rotation.x = t * 0.8 + d.a;
+                s.rotation.y = t * 0.6;
+            });
+
+            stars.rotation.y = t * 0.01;
+            stars.position.y = scrollSmooth * 6;
+
+            camera.position.x = smooth.x * 0.6;
+            camera.position.y = -smooth.y * 0.4;
+            camera.lookAt(0, 0, 0);
+
+            renderer.render(scene, camera);
+            if (!reduceMotion) requestAnimationFrame(frame);
+        }
+        frame();
+    </script>
+</body>
+</html>

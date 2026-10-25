@@ -4,470 +4,340 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Christael - Portfolio</title>
-    <meta name="description" content="Professional portfolio showcasing my work, skills, and experience">
-    <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <meta name="description" content="Christael is a full stack developer and designer in Abuja, Nigeria, building fast, user-centred web experiences.">
+    <meta name="theme-color" content="#f3efe7">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
     <script defer src="/_vercel/insights/script.js"></script>
 </head>
 <body>
     <!-- Navigation -->
-    <nav class="navbar">
-        <div class="nav-container">
-            <div class="nav-logo">
-                <a href="#home">Christael's Portfolio</a>
-            </div>
+    <header class="nav">
+        <nav class="nav-pill" aria-label="Main">
+            <a href="#home" class="nav-logo">christael<span>.</span></a>
             <ul class="nav-menu">
-                <li class="nav-item">
-                    <a href="#home" class="nav-link">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a href="#about" class="nav-link">About</a>
-                </li>
-                <li class="nav-item">
-                    <a href="#projects" class="nav-link">Projects</a>
-                </li>
-                <li class="nav-item">
-                    <a href="#skills" class="nav-link">Skills</a>
-                </li>
-                <li class="nav-item">
-                    <a href="#certifications" class="nav-link">Certifications</a>
-                </li>
-                <li class="nav-item">
-                    <a href="#contact" class="nav-link">Contact</a>
-                </li>
+                <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="#projects" class="nav-link">Work</a></li>
+                <li><a href="#skills" class="nav-link">Skills</a></li>
+                <li><a href="#certifications" class="nav-link">Certs</a></li>
+                <li class="nav-cta-mobile"><a href="#contact" class="nav-link">Contact</a></li>
             </ul>
-            <div class="hamburger">
+            <a href="#contact" class="nav-cta">Let's talk <i class="fas fa-arrow-right"></i></a>
+            <button class="hamburger" aria-label="Open menu" aria-expanded="false">
                 <span class="bar"></span>
                 <span class="bar"></span>
-                <span class="bar"></span>
-            </div>
-        </div>
-    </nav>
+            </button>
+        </nav>
+    </header>
 
-    <!-- Hero Section -->
-    <section id="home" class="hero">
-        <div class="hero-container">
-            <div class="hero-content">
-                <h1 class="hero-title">Hi, I'm <span class="highlight">Christael</span></h1>
-                <p class="hero-subtitle">Full Stack Developer & Designer</p>
-                <p class="hero-description">
-                    I create beautiful, functional, and user-centered digital experiences. 
-                    Passionate about clean code and innovative solutions.
-                </p>
-                <div class="hero-buttons">
-                    <a href="#projects" class="btn btn-primary">View My Work</a>
-                    <a href="#contact" class="btn btn-secondary">Get In Touch</a>
-                </div>
-            </div>
-            <div class="hero-image">
-                <img src="images/profilephoto.jpg" alt="Christael - Full Stack Developer" class="profile-image">
-            </div>
-        </div>
-        <div class="scroll-indicator">
-            <div class="mouse"></div>
-            <div class="arrow"></div>
-        </div>
-    </section>
-
-    <!-- About Section -->
-    <section id="about" class="about">
-        <div class="container">
-            <h2 class="section-title">About Me</h2>
-            <div class="about-content">
-                <div class="about-text">
-                    <p>
-                        I'm a passionate developer with a love for creating innovative solutions 
-                        that solve real-world problems. With expertise in modern web technologies, 
-                        I bring ideas to life through clean, efficient code and intuitive design.
-                    </p>
-                    <p>
-                        When I'm not coding, you can find me exploring new technologies, 
-                        contributing to open-source projects, or sharing knowledge with the developer community.
-                    </p>
-                    <div class="about-stats">
-                        <div class="stat">
-                            <h3>3+</h3>
-                            <p>Years Experience</p>
-                        </div>
-                        <div class="stat">
-                            <h3>10+</h3>
-                            <p>Projects Completed</p>
-                        </div>
-                        <div class="stat">
-                            <h3>10+</h3>
-                            <p>Happy Clients</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="about-image">
-                    <img src="images/aboutphoto.JPEG" alt="Christael working on code">
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Projects Section -->
-    <section id="projects" class="projects">
-        <div class="container">
-            <h2 class="section-title">My Projects</h2>
-            <div class="projects-grid">
-                <div class="project-card">
-                    <div class="project-image">
-                        <img src="images/royalexlanding.png" alt="Royalex" class="project-img">
-                    </div>
-                    <div class="project-content">
-                        <h3>Royalex</h3>
-                        <p>A modern e-commerce platform delivering exceptional shopping experiences with seamless navigation and user-friendly interface.</p>
-                        <div class="project-tech">
-                            <span class="tech-tag">Bootstrap</span>
-                            <span class="tech-tag">CSS3</span>
-                            <span class="tech-tag">JavaScript</span>
-                            <span class="tech-tag">Laravel</span>
-                        </div>
-                        <div class="project-links">
-                            <a href="https://royalex.store/" class="project-link"><i class="fab fa-github"></i> Code</a>
-                            <a href="https://royalex.store/" class="project-link"><i class="fas fa-external-link-alt"></i> Live</a>
-                        </div>
+    <main>
+        <!-- Hero -->
+        <section id="home" class="section">
+            <div class="bento hero-bento">
+                <div class="tile tile-intro reveal">
+                    <span class="status"><span class="status-dot"></span>Available for new projects</span>
+                    <h1 class="hero-title">
+                        Hi, I'm <span class="hl">Christael</span>.<br>
+                        I build websites people actually <em>enjoy</em> using.
+                    </h1>
+                    <p class="hero-subtitle">Full Stack Developer &amp; Designer. I create beautiful, functional, user-centred digital experiences, with a passion for clean code and innovative solutions.</p>
+                    <div class="hero-buttons">
+                        <a href="#projects" class="btn btn-dark">View my work <i class="fas fa-arrow-down"></i></a>
+                        <a href="#contact" class="btn btn-ghost">Get in touch</a>
                     </div>
                 </div>
 
-                <div class="project-card">
-                    <div class="project-image">
-                        <img src="images/lethereal.png" alt="E-Commerce Platform" class="project-img">
-                    </div>
-                    
-                    <div class="project-content">
-                        <h3>Lethereal Brand Website</h3>
-                        <p>A dummy e-commerce website for a brand called lethereal. This project is still in development and will be updated soon</p>
-                        <div class="project-tech">
-                            <span class="tech-tag">Bootstrap</span>
-                            <span class="tech-tag">Javascript</span>
-                            <span class="tech-tag">CSS3</span>
-                        </div>
-                        <div class="project-links">
-                            <a href="https://luxe-iota.vercel.app/" class="project-link"><i class="fab fa-github"></i> Code</a>
-                            <a href="https://luxe-iota.vercel.app/" class="project-link"><i class="fas fa-external-link-alt"></i> Live</a>
-                        </div>
+                <div class="tile tile-photo reveal">
+                    <img src="images/profilephoto.jpg" alt="Portrait of Christael" class="cover-img">
+                    <div class="photo-chip">
+                        <i class="fas fa-location-dot"></i>
+                        <span>Abuja, NG</span>
+                        <span class="chip-sep"></span>
+                        <span class="local-time" aria-label="Local time in Abuja">--:--</span>
                     </div>
                 </div>
 
-                <div class="project-card">
-                    <div class="project-image">
-                        <img src="images/smart-budget.png" alt="Smart Budget Calculator" class="project-img">
-                    </div>
-                    <div class="project-content">
-                        <h3>Smart Budget Calculator</h3>
-                        <p>A comprehensive budget management application that helps users track income, expenses, and savings with interactive charts and financial insights.</p>
-                        <div class="project-tech">
-                            <span class="tech-tag">Bootstrap</span>
-                            <span class="tech-tag">JavaScript</span>
-                            <span class="tech-tag">CSS3</span>
-                        </div>
-                        <div class="project-links">
-
-                            <a href="https://smart-budget-indol.vercel.app/" class="project-link"><i class="fab fa-github"></i> Code</a>
-                            <a href="https://smart-budget-indol.vercel.app/" class="project-link"><i class="fas fa-external-link-alt"></i> Live</a>
-                        </div>
-                    </div>
+                <div class="tile tile-stat tile-ink reveal">
+                    <span class="stat-num" data-count="3">0</span><span class="stat-plus">+</span>
+                    <p class="stat-label">Years of experience</p>
                 </div>
 
-                <div class="project-card">
-                    <div class="project-image">
-                        <img src="images/buildboard.png" alt="Buildboard Portfolio Generator" class="project-img">
-                    </div>
-                    <div class="project-content">
-                        <h3>Buildboard Portfolio Generator</h3>
-                        <p>A dynamic portfolio generator that allows users to create and customize professional portfolios with drag-and-drop functionality and real-time preview.</p>
-                        <div class="project-tech">
-                            <span class="tech-tag">Bootstrap</span>
-                            <span class="tech-tag">JavaScript</span>
-                            <span class="tech-tag">CSS3</span>
-                        </div>
-                        <div class="project-links">
-                            <a href="http://build-board-three.vercel.app/" class="project-link"><i class="fab fa-github"></i> Code</a>
-                            <a href="http://build-board-three.vercel.app/" class="project-link"><i class="fas fa-external-link-alt"></i> Live</a>
-                        </div>
-                    </div>
+                <div class="tile tile-stat tile-accent reveal">
+                    <span class="stat-num" data-count="10">0</span><span class="stat-plus">+</span>
+                    <p class="stat-label">Projects completed</p>
                 </div>
 
-               
-            </div>
-        </div>
-    </section>
-
-    <!-- Skills Section -->
-    <section id="skills" class="skills">
-        <div class="container">
-            <h2 class="section-title">Skills & Technologies</h2>
-            <div class="skills-grid">
-                <div class="skill-category">
-                    <h3>Frontend</h3>
-                    <div class="skill-items">
-                        <div class="skill-item">
-                            <i class="fab fa-html5"></i>
-                            <span>HTML</span>
-                        </div>
-                        <div class="skill-item">
-                            <i class="fab fa-css3-alt"></i>
-                            <span>CSS</span>
-                        </div>
-                        <div class="skill-item">
-                            <i class="fab fa-css3-alt"></i>
-                            <span>CSS3</span>
-                        </div>
-                        <div class="skill-item">
-                            <i class="fab fa-js-square"></i>
-                            <span>JavaScript</span>
-                        </div>
-                        <div class="skill-item">
-                            <i class="fab fa-react"></i>
-                            <span>React</span>
-                        </div>
-                        <div class="skill-item">
-                            <i class="fab fa-bootstrap"></i>
-                            <span>Bootstrap</span>
-                        </div>
-                    </div>
+                <div class="tile tile-stat tile-lilac reveal">
+                    <span class="stat-num" data-count="10">0</span><span class="stat-plus">+</span>
+                    <p class="stat-label">Happy clients</p>
                 </div>
 
-                <div class="skill-category">
-                    <h3>Backend</h3>
-                    <div class="skill-items">
-                        <div class="skill-item">
-                            <i class="fab fa-python"></i>
-                            <span>Python</span>
-                        </div>
-                        <div class="skill-item">
-                            <i class="fab fa-php"></i>
-                            <span>PHP</span>
-                        </div>
-                        <div class="skill-item">
-                            <i class="fas fa-server"></i>
-                            <span>Laravel</span>
-                        </div>
-                        <div class="skill-item">
-                            <i class="fas fa-database"></i>
-                            <span>MySQL</span>
-                        </div>
-                        <div class="skill-item">
-                            <i class="fas fa-code"></i>
-                            <span>Blade</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="skill-category">
-                    <h3>Tools & Others</h3>
-                    <div class="skill-items">
-                        <div class="skill-item">
-                            <i class="fab fa-git-alt"></i>
-                            <span>Git</span>
-                        </div>
-                        <div class="skill-item">
-                            <i class="fab fa-figma"></i>
-                            <span>Figma</span>
-                        </div>
-                        <div class="skill-item">
-                            <i class="fas fa-server"></i>
-                            <span>XAMPP</span>
-                        </div>
-                        <div class="skill-item">
-                            <i class="fas fa-code"></i>
-                            <span>VS Code</span>
-                        </div>
-                        <div class="skill-item">
-                            <i class="fas fa-terminal"></i>
-                            <span>Terminal</span>
-                        </div>
-                        <div class="skill-item">
-                            <i class="fas fa-database"></i>
-                            <span>phpMyAdmin</span>
-                        </div>
-                        <div class="skill-item">
-                            <i class="fas fa-cloud"></i>
-                            <span>Vercel</span>
+                <div class="tile tile-marquee reveal" aria-hidden="true">
+                    <div class="marquee">
+                        <div class="marquee-track">
+                            <span>Laravel</span><i>✦</i><span>React</span><i>✦</i><span>JavaScript</span><i>✦</i><span>Python</span><i>✦</i><span>PHP</span><i>✦</i><span>MySQL</span><i>✦</i><span>Figma</span><i>✦</i><span>Bootstrap</span><i>✦</i>
+                            <span>Laravel</span><i>✦</i><span>React</span><i>✦</i><span>JavaScript</span><i>✦</i><span>Python</span><i>✦</i><span>PHP</span><i>✦</i><span>MySQL</span><i>✦</i><span>Figma</span><i>✦</i><span>Bootstrap</span><i>✦</i>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Certifications Section -->
-    <section id="certifications" class="certifications">
-        <div class="container">
-            <h2 class="section-title">Certifications & Badges</h2>
-            <div class="cisco-logo-container">
-                <img src="badges/cisco.png" alt="Cisco" class="cisco-logo">
+        <!-- About -->
+        <section id="about" class="section">
+            <div class="section-head reveal">
+                <span class="eyebrow">01 — About</span>
+                <h2 class="section-title">A developer with a designer's eye.</h2>
             </div>
-            <div class="certifications-grid">
-                <div class="certification-card">
-                    <div class="certification-badge">
-                        <img src="badges/ITE.png" alt="IT Essentials Certification" class="badge-image">
-                    </div>
-                    <div class="certification-content">
-                        <h3>IT Essentials</h3>
-                        <p>Comprehensive course covering computer hardware, software, networking, and security fundamentals. Learned to assemble, configure, and troubleshoot computers and mobile devices.</p>
-                        <div class="certification-meta">
-                            <span class="certification-date">2022</span>
-                        </div>
-                        <a href="https://www.credly.com/badges/77b4d629-7268-4012-8729-b124bbaacb79/public_url" class="certification-link">View Certificate</a>
-                    </div>
+            <div class="bento about-bento">
+                <div class="tile tile-about-img reveal">
+                    <img src="images/aboutphoto.JPEG" alt="Christael working on code" class="cover-img">
                 </div>
-
-                <div class="certification-card">
-                    <div class="certification-badge">
-                        <img src="badges/introduction-to-cybersecurity.png" alt="Introduction to Cybersecurity Certification" class="badge-image">
-                    </div>
-                    <div class="certification-content">
-                        <h3>Introduction to Cybersecurity</h3>
-                        <p>Explored cybersecurity fundamentals, threat landscape, network security, and ethical hacking principles. Gained understanding of protecting systems and data from cyber threats.</p>
-                        <div class="certification-meta">
-                            <span class="certification-date">2022</span>
-                        </div>
-                        <a href="https://www.credly.com/badges/5107cfa7-3fcd-468a-bd3a-1ad9ed38ad6d/public_url" class="certification-link">View Certificate</a>
-                    </div>
+                <div class="tile tile-about-text reveal">
+                    <p class="lead">I'm a passionate developer who loves creating innovative solutions that solve real-world problems.</p>
+                    <p>With expertise in modern web technologies, I bring ideas to life through clean, efficient code and intuitive design. When I'm not coding, you'll find me exploring new technologies, contributing to open-source projects, or sharing knowledge with the developer community.</p>
                 </div>
-
-                <div class="certification-card">
-                    <div class="certification-badge">
-                        <img src="badges/python-essentials-1.1.png" alt="Python Essentials Certification" class="badge-image">
-                    </div>
-                    <div class="certification-content">
-                        <h3>Python Essentials</h3>
-                        <p>Mastered Python programming fundamentals including variables, data types, control structures, functions, and object-oriented programming concepts for software development.</p>
-                        <div class="certification-meta">
-                            <span class="certification-date">2023</span>
-                        </div>
-                        <a href="https://www.credly.com/badges/5dea939a-64c4-4741-b11b-e5297eb9e16a/public_url" class="certification-link">View Certificate</a>
-                    </div>
-                </div>
-
-                <div class="linkedin-logo-container">
-                    <img src="badges/LI-Logo.png" alt="LinkedIn" class="linkedin-logo">
-                </div>
-
-                <div class="certification-card">
-                    <div class="certification-badge">
-                        <img src="badges/CertificateOfCompletion_Practical GitHub Actions_page-0001.jpg" alt="Practical GitHub Actions Certification" class="badge-image">
-                    </div>
-                    <div class="certification-content">
-                        <h3>Practical GitHub Actions</h3>
-                        <p>Learned to automate repetitive development workflows using GitHub Actions. Covered workflow creation, marketplace action publishing, Docker integration, and CI/CD pipeline automation for real-world projects.</p>
-                        <div class="certification-meta">
-                            <span class="certification-date">2025</span>
-                        </div>
-                        <a href="https://www.linkedin.com/learning/certificates/6c43d1bc7f0ec4900abeda7d51c58094ce325934bb29f5b620848a302c9084eb?trk=share_certificate" class="certification-link">View Certificate</a>
-                    </div>
+                <div class="tile tile-quote tile-accent reveal">
+                    <i class="fas fa-quote-left"></i>
+                    <p>Good software should feel effortless, even when it isn't.</p>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Contact Section -->
-    <section id="contact" class="contact">
-        <div class="container">
-            <h2 class="section-title">Get In Touch</h2>
-            <p class="contact-intro">I'm always interested in new opportunities and exciting projects. Let's connect and create something amazing together!</p>
-            
-            <div class="contact-content">
-                <div class="contact-methods-wrapper">
-                    <div class="contact-method-card">
-                        <div class="method-icon">
-                            <i class="fas fa-envelope"></i>
-                        </div>
-                        <div class="method-content">
-                            <h4>Email</h4>
-                            <a href="mailto:christaelujomor@gmail.com">christaelujomor@gmail.com</a>
-                        </div>
+        <!-- Projects -->
+        <section id="projects" class="section">
+            <div class="section-head reveal">
+                <span class="eyebrow">02 — Selected work</span>
+                <h2 class="section-title">Things I've built.</h2>
+            </div>
+            <div class="bento projects-bento">
+                <a href="https://joshua-alabi-portfolio.vercel.app/" target="_blank" rel="noopener noreferrer" class="tile project project-featured reveal">
+                    <div class="project-shot">
+                        <div class="browser-bar"><span></span><span></span><span></span><em>joshua-alabi-portfolio.vercel.app</em></div>
+                        <img src="images/joshua-alabi.png" alt="Joshua Alabi portfolio homepage">
                     </div>
-
-                    <div class="contact-method-card">
-                        <div class="method-icon">
-                            <i class="fas fa-phone"></i>
+                    <div class="project-info">
+                        <div>
+                            <span class="project-kicker">Featured · Client portfolio</span>
+                            <h3>Joshua Alabi</h3>
+                            <p>A portfolio for AI engineer Joshua Onasi Alabi, showcasing ML projects, tools and certifications with a clean light/dark theme.</p>
+                            <div class="tags">
+                                <span>HTML5</span><span>CSS3</span><span>JavaScript</span><span>Vercel</span>
+                            </div>
                         </div>
-                        <div class="method-content">
-                            <h4>Phone</h4>
-                            <a href="tel:+2348114286908">+234 811 428 6908</a>
-                        </div>
+                        <span class="project-arrow"><i class="fas fa-arrow-up-right-from-square"></i></span>
                     </div>
+                </a>
 
-                    <div class="contact-method-card">
-                        <div class="method-icon">
-                            <i class="fas fa-map-marker-alt"></i>
+                <a href="https://smart-budget-indol.vercel.app/" target="_blank" rel="noopener noreferrer" class="tile project reveal">
+                    <div class="project-shot">
+                        <div class="browser-bar"><span></span><span></span><span></span></div>
+                        <img src="images/smart-budget.png" alt="Smart Budget Calculator dashboard">
+                    </div>
+                    <div class="project-info">
+                        <div>
+                            <span class="project-kicker">Finance tool</span>
+                            <h3>Smart Budget Calculator</h3>
+                            <p>Track income, expenses and savings with interactive charts and financial insights.</p>
+                            <div class="tags">
+                                <span>JavaScript</span><span>Bootstrap</span><span>CSS3</span>
+                            </div>
                         </div>
-                        <div class="method-content">
-                            <h4>Location</h4>
-                            <span>Abuja, Nigeria</span>
+                        <span class="project-arrow"><i class="fas fa-arrow-up-right-from-square"></i></span>
+                    </div>
+                </a>
+
+                <a href="http://build-board-three.vercel.app/" target="_blank" rel="noopener noreferrer" class="tile project reveal">
+                    <div class="project-shot">
+                        <div class="browser-bar"><span></span><span></span><span></span></div>
+                        <img src="images/buildboard.png" alt="Buildboard portfolio generator">
+                    </div>
+                    <div class="project-info">
+                        <div>
+                            <span class="project-kicker">Generator</span>
+                            <h3>Buildboard</h3>
+                            <p>Create and customise professional portfolios with drag-and-drop and a real-time preview.</p>
+                            <div class="tags">
+                                <span>JavaScript</span><span>Bootstrap</span><span>CSS3</span>
+                            </div>
                         </div>
+                        <span class="project-arrow"><i class="fas fa-arrow-up-right-from-square"></i></span>
+                    </div>
+                </a>
+            </div>
+        </section>
+
+        <!-- Skills -->
+        <section id="skills" class="section">
+            <div class="section-head reveal">
+                <span class="eyebrow">03 — Toolkit</span>
+                <h2 class="section-title">Skills &amp; technologies.</h2>
+            </div>
+            <div class="bento skills-bento">
+                <div class="tile skill-tile reveal">
+                    <div class="skill-head">
+                        <span class="skill-icon"><i class="fas fa-palette"></i></span>
+                        <h3>Frontend</h3>
+                    </div>
+                    <div class="chips">
+                        <span><i class="fab fa-html5"></i>HTML5</span>
+                        <span><i class="fab fa-css3-alt"></i>CSS3</span>
+                        <span><i class="fab fa-js"></i>JavaScript</span>
+                        <span><i class="fab fa-react"></i>React</span>
+                        <span><i class="fab fa-bootstrap"></i>Bootstrap</span>
                     </div>
                 </div>
 
-                <div class="social-section">
-                    <h3>Connect With Me</h3>
-                    <div class="social-links">
-                        <a href="https://github.com/Christael1234" class="social-link" target="_blank" rel="noopener noreferrer">
-                            <i class="fab fa-github"></i>
-                            <span>GitHub</span>
-                        </a>
-                        <a href="https://www.linkedin.com/in/christael-blessing-ujomor-971b812a1/" class="social-link" target="_blank" rel="noopener noreferrer">
-                            <i class="fab fa-linkedin"></i>
-                            <span>LinkedIn</span>
-                        </a>
-                        <a href="https://www.instagram.com/_.cristel_/" class="social-link" target="_blank" rel="noopener noreferrer">
-                            <i class="fab fa-instagram"></i>
-                            <span>Instagram</span>
-                        </a>
+                <div class="tile skill-tile tile-ink reveal">
+                    <div class="skill-head">
+                        <span class="skill-icon"><i class="fas fa-server"></i></span>
+                        <h3>Backend</h3>
+                    </div>
+                    <div class="chips">
+                        <span><i class="fab fa-python"></i>Python</span>
+                        <span><i class="fab fa-php"></i>PHP</span>
+                        <span><i class="fab fa-laravel"></i>Laravel</span>
+                        <span><i class="fas fa-database"></i>MySQL</span>
+                        <span><i class="fas fa-code"></i>Blade</span>
+                    </div>
+                </div>
+
+                <div class="tile skill-tile reveal">
+                    <div class="skill-head">
+                        <span class="skill-icon"><i class="fas fa-toolbox"></i></span>
+                        <h3>Tools &amp; others</h3>
+                    </div>
+                    <div class="chips">
+                        <span><i class="fab fa-git-alt"></i>Git</span>
+                        <span><i class="fab fa-figma"></i>Figma</span>
+                        <span><i class="fas fa-code"></i>VS Code</span>
+                        <span><i class="fas fa-terminal"></i>Terminal</span>
+                        <span><i class="fas fa-server"></i>XAMPP</span>
+                        <span><i class="fas fa-table"></i>phpMyAdmin</span>
+                        <span><i class="fas fa-cloud"></i>Vercel</span>
                     </div>
                 </div>
             </div>
+        </section>
 
-            <div class="contact-form-wrapper">
-                <h3 class="form-title">Send me a message</h3>
-                <form class="contact-form" action="https://formspree.io/f/mvgqwoze" method="POST">
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="name">
-                                <i class="fas fa-user"></i>
-                            </label>
-                            <input type="text" id="name" name="name" placeholder="Your Name" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="email">
-                                <i class="fas fa-envelope"></i>
-                            </label>
-                            <input type="email" id="email" name="email" placeholder="Your Email" required>
-                        </div>
+        <!-- Certifications -->
+        <section id="certifications" class="section">
+            <div class="section-head reveal">
+                <span class="eyebrow">04 — Credentials</span>
+                <h2 class="section-title">Certifications &amp; badges.</h2>
+            </div>
+            <div class="bento certs-bento">
+                <a href="https://www.credly.com/badges/77b4d629-7268-4012-8729-b124bbaacb79/public_url" target="_blank" rel="noopener noreferrer" class="tile cert reveal">
+                    <div class="cert-top">
+                        <img src="badges/ITE.png" alt="IT Essentials badge" class="cert-badge">
+                        <span class="cert-year">2022</span>
                     </div>
-                    <div class="form-group">
-                        <label for="subject">
-                            <i class="fas fa-tag"></i>
-                        </label>
-                        <input type="text" id="subject" name="subject" placeholder="Subject" required>
+                    <span class="cert-issuer"><img src="badges/cisco.png" alt="">Cisco</span>
+                    <h3>IT Essentials</h3>
+                    <p>Computer hardware, software, networking and security fundamentals: assembling, configuring and troubleshooting devices.</p>
+                    <span class="cert-link">View certificate <i class="fas fa-arrow-right"></i></span>
+                </a>
+
+                <a href="https://www.credly.com/badges/5107cfa7-3fcd-468a-bd3a-1ad9ed38ad6d/public_url" target="_blank" rel="noopener noreferrer" class="tile cert reveal">
+                    <div class="cert-top">
+                        <img src="badges/introduction-to-cybersecurity.png" alt="Introduction to Cybersecurity badge" class="cert-badge">
+                        <span class="cert-year">2022</span>
                     </div>
-                    <div class="form-group">
-                        <label for="message">
-                            <i class="fas fa-comment"></i>
-                        </label>
-                        <textarea id="message" name="message" placeholder="Your Message" rows="6" required></textarea>
+                    <span class="cert-issuer"><img src="badges/cisco.png" alt="">Cisco</span>
+                    <h3>Introduction to Cybersecurity</h3>
+                    <p>The threat landscape, network security and ethical hacking principles for protecting systems and data.</p>
+                    <span class="cert-link">View certificate <i class="fas fa-arrow-right"></i></span>
+                </a>
+
+                <a href="https://www.credly.com/badges/5dea939a-64c4-4741-b11b-e5297eb9e16a/public_url" target="_blank" rel="noopener noreferrer" class="tile cert reveal">
+                    <div class="cert-top">
+                        <img src="badges/python-essentials-1.1.png" alt="Python Essentials badge" class="cert-badge">
+                        <span class="cert-year">2023</span>
                     </div>
-                    <button type="submit" class="btn btn-primary submit-btn">
-                        <span>Send Message</span>
-                        <i class="fas fa-paper-plane"></i>
+                    <span class="cert-issuer"><img src="badges/cisco.png" alt="">Cisco</span>
+                    <h3>Python Essentials</h3>
+                    <p>Variables, data types, control flow, functions and object-oriented programming in Python.</p>
+                    <span class="cert-link">View certificate <i class="fas fa-arrow-right"></i></span>
+                </a>
+
+                <a href="https://www.linkedin.com/learning/certificates/6c43d1bc7f0ec4900abeda7d51c58094ce325934bb29f5b620848a302c9084eb?trk=share_certificate" target="_blank" rel="noopener noreferrer" class="tile cert reveal">
+                    <div class="cert-top">
+                        <img src="badges/CertificateOfCompletion_Practical GitHub Actions_page-0001.jpg" alt="Practical GitHub Actions certificate" class="cert-badge cert-badge-doc">
+                        <span class="cert-year">2025</span>
+                    </div>
+                    <span class="cert-issuer"><img src="badges/LI-In-Bug.png" alt="">LinkedIn Learning</span>
+                    <h3>Practical GitHub Actions</h3>
+                    <p>Automating workflows with GitHub Actions: marketplace actions, Docker integration and CI/CD pipelines.</p>
+                    <span class="cert-link">View certificate <i class="fas fa-arrow-right"></i></span>
+                </a>
+            </div>
+        </section>
+
+        <!-- Contact -->
+        <section id="contact" class="section">
+            <div class="bento contact-bento">
+                <div class="tile tile-ink contact-card reveal">
+                    <span class="eyebrow eyebrow-light">05 — Contact</span>
+                    <h2 class="contact-title">Let's build something <span class="hl-accent">great</span> together.</h2>
+                    <p class="contact-intro">I'm always interested in new opportunities and exciting projects. Drop me a line.</p>
+
+                    <button class="email-copy" data-email="christaelujomor@gmail.com">
+                        <span>christaelujomor@gmail.com</span>
+                        <i class="far fa-copy"></i>
                     </button>
-                </form>
+
+                    <ul class="contact-list">
+                        <li><i class="fas fa-phone"></i><a href="tel:+2348114286908">+234 811 428 6908</a></li>
+                        <li><i class="fas fa-location-dot"></i><span>Abuja, Nigeria</span></li>
+                    </ul>
+
+                    <div class="socials">
+                        <a href="https://github.com/Christael1234" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                        <a href="https://www.linkedin.com/in/christael-blessing-ujomor-971b812a1/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="https://www.instagram.com/_.cristel_/" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+
+                <div class="tile form-card reveal">
+                    <h3 class="form-title">Send me a message</h3>
+                    <form class="contact-form" action="https://formspree.io/f/mvgqwoze" method="POST">
+                        <div class="form-row">
+                            <div class="field">
+                                <input type="text" id="name" name="name" placeholder=" " required>
+                                <label for="name">Your name</label>
+                            </div>
+                            <div class="field">
+                                <input type="email" id="email" name="email" placeholder=" " required>
+                                <label for="email">Your email</label>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <input type="text" id="subject" name="subject" placeholder=" " required>
+                            <label for="subject">Subject</label>
+                        </div>
+                        <div class="field">
+                            <textarea id="message" name="message" placeholder=" " rows="5" required></textarea>
+                            <label for="message">Your message</label>
+                        </div>
+                        <button type="submit" class="btn btn-accent submit-btn">
+                            <span>Send message</span>
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </form>
+                </div>
             </div>
-        </div>
-    </section>
+        </section>
+    </main>
 
     <!-- Footer -->
     <footer class="footer">
-        <div class="container">
-            <p>&copy; Christael 2025. All rights reserved.</p>
-        </div>
+        <p>&copy; <span class="year">2025</span> Christael. Designed &amp; built with care.</p>
+        <a href="#home" class="back-top">Back to top <i class="fas fa-arrow-up"></i></a>
     </footer>
 
     <script src="script.js"></script>
 </body>
-</html> 
+</html>
